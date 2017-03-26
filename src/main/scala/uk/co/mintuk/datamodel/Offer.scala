@@ -1,14 +1,12 @@
 package uk.co.mintuk.datamodel
 
 trait Offer {
-  def payableCount: Int = Integer.MAX_VALUE
-  def freeItemCount : Int = 0
+  val payableSize: Int = Integer.MAX_VALUE
+  val freeItemSize : Int = 0
   def cashBackAmount: BigDecimal = 0
   def fixedCostAmount: BigDecimal = 0
 }
 
-case class NoOffer(name:String = "BuyOneGetOneFreeOffer")
-case class BuyOneGetOneFreeOffer(name:String = "BuyOneGetOneFreeOffer",
-                                 override val payableCount: Int = 1, override val freeItemCount: Int = 1 ) extends Offer
-case class BuyThreeGetTwoFreeOffer(name:String = "BuyThreeGetTwoFreeOffer",
-                                   override val payableCount: Int = 3, override val freeItemCount: Int =2) extends Offer
+case object NoDiscountOffer extends Offer
+case object BuyOneGetOneFreeOffer extends Offer {override val payableSize = 1; override  val freeItemSize =2 }
+case object BuyThreeGetTwoFreeOffer extends Offer{override val payableSize = 1; override  val freeItemSize =2}
