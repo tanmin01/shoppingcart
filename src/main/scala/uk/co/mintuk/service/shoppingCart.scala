@@ -1,9 +1,19 @@
 package uk.co.mintuk.service
 
-import uk.co.mintuk.datamodel.Payable
+import uk.co.mintuk.datamodel._
 
 object shoppingCart {
-  def calculatePayment(payables: List[Payable]): BigDecimal = {
-    payables.map(payable => payable.cost).sum
+  val avaiableOffers : List[Offer] = List(NoDiscountOffer, BuyOneGetOneFreeOffer, BuyThreeGetTwoFreeOffer)
+
+  def calculatePayment(items: List[ShoppingItem]): BigDecimal = {
+    items.map(item => item.cost).sum
   }
+
+  def calculatePaymentByGroupWithOffers(items: List[ShoppingItem]): BigDecimal = {
+    val groups : List[Group] = List.empty[Group]
+    items.foreach(item => addToGroup(item))
+    groups.map(group => group.cost).sum
+  }
+
+  def addToGroup (item :ShoppingItem) : Unit = {}
 }
