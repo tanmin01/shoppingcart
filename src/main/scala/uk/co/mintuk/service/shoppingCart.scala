@@ -16,11 +16,11 @@ object shoppingCart {
     val openGroups: Map[String, Group] = Map(Apple().name -> BuyOneGetOneFreeGroup(),
        Orange().name ->BuyThreeGetTwoFreeGroup(), "" -> NoDiscountGroup())
     items.foreach(item => buildGroups(item, openGroups, closedGroups))
-    closedGroups.toList.map(group => group.cost).sum + openGroups.values.toList.map(group => group.cost).sum
+    (closedGroups.toList++openGroups.values.toList).map(group => group.cost).sum
   }
 
-  def buildGroups(item: ShoppingItem, open: Map[String, Group], closed: ListBuffer[Group]) = {
-    val group: Option[Group] = addItem(item, open)
+  def buildGroups(item: ShoppingItem, currentWorkingGroups: Map[String, Group], closed: ListBuffer[Group]) = {
+    val group: Option[Group] = addItem(item, currentWorkingGroups)
     if (group.nonEmpty) {
       closed += ClonedGroup(group.get)
       group.get.costItems.clear()
@@ -28,8 +28,8 @@ object shoppingCart {
     }
   }
 
-  def addItem(item: ShoppingItem, open: Map[String, Group]): Option[Group] = {
-    val opt: Option[Group] = open.get(item.name)
+  def addItem(item: ShoppingItem, currentWorkingGroups: Map[String, Group]): Option[Group] = {
+    val opt: Option[Group] = currentWorkingGroups.get(item.name)
     if (opt.nonEmpty) {
       opt.get.add(item)
       if (opt.get.full) {

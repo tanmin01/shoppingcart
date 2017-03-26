@@ -28,7 +28,6 @@ trait Group {
   }
 }
 
-
 case class ClonedGroup (group :Group) extends Group {
     this.costItems ++=group.costItems
     this.freeItems ++=group.freeItems
