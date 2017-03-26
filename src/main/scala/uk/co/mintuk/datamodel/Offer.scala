@@ -8,5 +8,5 @@ trait Offer {
 }
 
 case object NoDiscountOffer extends Offer
-case object BuyOneGetOneFreeOffer extends Offer {override val payableSize = 1; override  val freeItemSize =2 }
-case object BuyThreeGetTwoFreeOffer extends Offer{override val payableSize = 1; override  val freeItemSize =2}
+case object BuyOneGetOneFreeOffer extends Offer {override val payableSize = 1; override  val freeItemSize =1 }
+case object BuyThreeGetTwoFreeOffer extends Offer{override val payableSize = 3; override  val freeItemSize =2}

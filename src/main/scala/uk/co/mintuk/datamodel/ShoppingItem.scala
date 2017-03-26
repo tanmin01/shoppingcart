@@ -1,10 +1,13 @@
 package uk.co.mintuk.datamodel
 
 trait ShoppingItem {
+  val name = ""
   val price: BigDecimal = 0
   val discountRatio : BigDecimal = 0
-  val cost : BigDecimal = price * (1.00-discountRatio)
+  def cost : BigDecimal = price * (1.00-discountRatio)
 }
 
-case class Apple(name:String = "Apple", override val price: BigDecimal= 60) extends ShoppingItem
-case class Orange(name:String = "Orange",override val price:BigDecimal= 25) extends ShoppingItem
+case class Apple(override val name:String = "Apple", override val price: BigDecimal= 60) extends ShoppingItem
+case class Orange(override val name:String = "Orange",override val price:BigDecimal= 25) extends ShoppingItem
+
+//case object pear extends ShoppingItem  {override val name :String = "Pear";override val price: BigDecimal= 45.0}

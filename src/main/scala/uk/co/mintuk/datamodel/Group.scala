@@ -7,9 +7,8 @@ trait Group {
   val costItems: ListBuffer[ShoppingItem] = ListBuffer.empty[ShoppingItem]
   val freeItems: ListBuffer[ShoppingItem] = ListBuffer.empty[ShoppingItem]
 
-  val cost : BigDecimal = {
-    if(offer.fixedCostAmount == 0) costItems.toList.map(each => each.cost).sum - offer.cashBackAmount
-    else offer.fixedCostAmount
+  def cost : BigDecimal = {
+     costItems.toList.map(each => each.cost).sum - offer.cashBackAmount
   }
 
   def add(item: ShoppingItem): Boolean = {
