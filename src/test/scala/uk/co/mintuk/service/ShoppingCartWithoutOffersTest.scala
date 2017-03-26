@@ -10,12 +10,12 @@ class ShoppingCartWithoutOffersTest extends FunSpec with ShouldMatchers with Bef
   describe("Simple shopping cart with no offers") {
     it("an empty shopping cart should pay zero amount") {
       val noItems : List[ShoppingItem] = List.empty[ShoppingItem]
-      shoppingCart.calculatePaymentByGroupWithOffers(noItems) should equal(0)
+      shoppingCart.calculatePayment(noItems) should equal(0)
     }
 
     it("an shopping cart with some items should pay some amount") {
       val someItems: List[ShoppingItem] = List(Apple(),Apple(),Orange(),Apple())
-      shoppingCart.calculatePaymentByGroupWithOffers(someItems) should equal(0)
+      shoppingCart.calculatePayment(someItems) should equal(205)
     }
   }
 }
