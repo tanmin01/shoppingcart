@@ -11,6 +11,11 @@ trait Group {
      costItems.toList.map(each => each.cost).sum - offer.cashBackAmount
   }
 
+  def full : Boolean = {
+    costItems.size == offer.payableSize && freeItems.size == offer.freeItemSize
+  }
+
+
   def add(item: ShoppingItem): Boolean = {
     if(costItems.size < offer.payableSize) {
       costItems += item
@@ -21,6 +26,12 @@ trait Group {
     }
     true
   }
+}
+
+
+case class ClonedGroup (group :Group) extends Group {
+    this.costItems ++=group.costItems
+    this.freeItems ++=group.freeItems
 }
 
 case class NoDiscountGroup() extends Group
